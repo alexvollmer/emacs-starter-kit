@@ -6,7 +6,6 @@
  '(inhibit-startup-screen t)
  '(load-home-init-file t t))
 
-(set-face-font 'default "-apple-inconsolata-medium-r-normal--18-0-72-72-m-0-iso10646-1")
 (prefer-coding-system 'utf-8)
 
 (custom-set-faces
@@ -31,7 +30,8 @@
       (setq browse-url-browser-function
             '(("." . browse-url-default-macosx-browser)))))
 
-;; (add-to-list 'load-path "~/.emacs.d/vendor/color-theme")
-;; (require 'color-theme)
-;; (color-theme-initialize)
-;;(color-theme-charcoal-black)
+(require 'color-theme)
+;;(color-theme-initialize)
+(color-theme-blackboard)
+
+;;(require 'my-ruby)
