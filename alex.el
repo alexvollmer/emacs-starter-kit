@@ -113,3 +113,10 @@
 (add-hook 'confluence-mode-hook
           '(lambda ()
              (local-set-key "\C-xw" confluence-prefix-map)))
+
+;; HAML and SASS
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+ 
+(require 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
