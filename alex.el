@@ -114,3 +114,7 @@
  
 (require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
+
+;; Quick window navigation
+(require 'window-number)
+(window-number-meta-mode 1)
