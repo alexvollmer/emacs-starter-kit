@@ -125,3 +125,9 @@
 
 ;; Make IDO rock *even* more
 (setq imenu-auto-rescan t)
+
+;; yasnippet
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet.el"))
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
