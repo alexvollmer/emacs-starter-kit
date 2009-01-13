@@ -59,7 +59,9 @@
        (add-hook 'confluence-mode-hook 'longlines-mode)
        (add-hook 'confluence-before-save-hook 'longlines-before-revert-hook)
        (add-hook 'confluence-before-revert-hook 'longlines-before-revert-hook)
-       (add-hook 'confluence-mode-hook '(lambda () (local-set-key "\C-j" 'confluence-newline-and-indent))))))
+       (add-hook 'confluence-mode-hook
+                 '(lambda ()
+                    (local-set-key "\C-j" 'confluence-newline-and-indent))))))
 
 ;; LongLines mode: http://www.emacswiki.org/emacs-en/LongLines
 (autoload 'longlines-mode "longlines" "LongLines Mode." t)
@@ -88,8 +90,7 @@
        (with-current-buffer (ad-get-arg 0)
          (longlines-suspend)))
 
-    
-     (add-hook 'ediff-cleanup-hook 
+     (add-hook 'ediff-cleanup-hook
                '(lambda ()
                   (dolist (tmp-buf (list ediff-buffer-A
                                          ediff-buffer-B
@@ -111,7 +112,7 @@
 ;; HAML and SASS
 (require 'haml-mode)
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
- 
+
 (require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 
@@ -120,3 +121,4 @@
 (window-number-meta-mode 1)
 
 (column-number-mode)
+(whitespace-mode t)
