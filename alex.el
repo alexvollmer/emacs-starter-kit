@@ -118,3 +118,5 @@
 ;; Quick window navigation
 (require 'window-number)
 (window-number-meta-mode 1)
+
+(column-number-mode)
