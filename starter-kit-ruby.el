@@ -5,6 +5,7 @@
 (eval-after-load 'ruby-mode
   '(progn
      (require 'ruby-compilation)
+     (require 'autotest)
      (add-hook 'ruby-mode-hook 'inf-ruby-keys)
      (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
      (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)
