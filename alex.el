@@ -122,3 +122,6 @@
 
 (column-number-mode)
 (whitespace-mode t)
+
+;; Make IDO rock *even* more
+(setq imenu-auto-rescan t)
