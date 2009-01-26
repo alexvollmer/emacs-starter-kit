@@ -32,7 +32,10 @@
 (add-to-list 'load-path (concat dotfiles-dir "/vendor/color-theme"))
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-charcoal-black)
+;(color-theme-aalto-light)
+;(color-theme-andreas)
+;(color-theme-charcoal-black)
+(color-theme-blackboard)
 
 ;; extra CSS goodness for portal work
 (add-to-list 'auto-mode-alist '("\\.css\\.ncss$" . css-mode))
