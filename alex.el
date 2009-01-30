@@ -41,8 +41,8 @@
 (add-to-list 'auto-mode-alist '("\\.css\\.ncss$" . css-mode))
 
 ;; don't use js2-mode
-(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
-(setq javascript-indent-level 2)
+;; (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+;; (setq javascript-indent-level 2)
 
 ;; Confluence
 (require 'confluence)
