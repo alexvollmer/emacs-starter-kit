@@ -136,3 +136,5 @@
 (yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
 
 (require 'magit)
+
+(server-start)
