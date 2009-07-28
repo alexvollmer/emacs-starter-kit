@@ -14,6 +14,7 @@
 (prefer-coding-system 'utf-8)
 
 (setq visible-bell t
+      echo-keystrokes 0.1
       font-lock-maximum-decoration t
       inhibit-startup-message t
       transient-mark-mode t
@@ -31,7 +32,7 @@
       save-place-file (concat dotfiles-dir "places"))
 
 ;; Set this to whatever browser you use
-(setq browse-url-browser-function 'browse-url-firefox)
+;; (setq browse-url-browser-function 'browse-url-firefox)
 ;; (setq browse-url-browser-function 'browse-default-macosx-browser)
 ;; (setq browse-url-browser-function 'browse-default-windows-browser)
 ;; (setq browse-url-browser-function 'browse-default-kde)
@@ -68,8 +69,11 @@
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
 
-(add-hook 'text-mode-hook (lambda () (auto-fill-mode 1)))
-(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook 'turn-on-flyspell)
+
+(defvar coding-hook nil
+  "Hook that gets run on activation of any programming mode.")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (random t) ;; Seed the random-number generator
@@ -97,6 +101,9 @@
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
+
+;; Default to unified diffs
+(setq diff-switches "-u")
 
 ;; Cosmetics
 

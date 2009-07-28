@@ -21,7 +21,8 @@
 ;; Buffer-related
 
 (defun ido-imenu ()
-  "Update the imenu index and then use ido to select a symbol to navigate to."
+  "Update the imenu index and then use ido to select a symbol to navigate to.
+Symbols matching the text at point are put first in the completion list."
   (interactive)
   (imenu--make-index-alist)
   (let ((name-and-pos '())
@@ -46,22 +47,53 @@
                                (add-to-list 'symbol-names name)
                                (add-to-list 'name-and-pos (cons name position))))))))
       (addsymbols imenu--index-alist))
+    ;; If there are matching symbols at point, put them at the beginning of `symbol-names'.
+    (let ((symbol-at-point (thing-at-point 'symbol)))
+      (when symbol-at-point
+        (let* ((regexp (concat (regexp-quote symbol-at-point) "$"))
+               (matching-symbols (delq nil (mapcar (lambda (symbol)
+                                                     (if (string-match regexp symbol) symbol))
+                                                   symbol-names))))
+          (when matching-symbols
+            (sort matching-symbols (lambda (a b) (> (length a) (length b))))
+            (mapc (lambda (symbol) (setq symbol-names (cons symbol (delete symbol symbol-names))))
+                  matching-symbols)))))
     (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
            (position (cdr (assoc selected-symbol name-and-pos))))
       (goto-char position))))
 
-(defun coding-hook ()
-  "Enable things that are convenient across all coding buffers."
-  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+;;; These belong in coding-hook:
+
+;; We have a number of turn-on-* functions since it's advised that lambda
+;; functions not go in hooks. Repeatedly evaling an add-to-list with a
+;; hook value will repeatedly add it since there's no way to ensure
+;; that a lambda doesn't already exist in the list.
+
+(defun local-column-number-mode ()
   (make-local-variable 'column-number-mode)
-  (column-number-mode t)
-  (setq save-place t)
-  (auto-fill-mode) ;; in comments only
-  (if window-system (hl-line-mode t))
-  ;;(pretty-lambdas)
-  ;; TODO: this breaks in js2-mode!
-  ;;(if (functionp 'idle-highlight) (idle-highlight))
-  )
+  (column-number-mode t))
+
+(defun local-comment-auto-fill ()
+  (set (make-local-variable 'comment-auto-fill-only-comments) t)
+  (auto-fill-mode t))
+
+(defun turn-on-hl-line-mode ()
+  (if window-system (hl-line-mode t)))
+
+(defun turn-on-save-place-mode ()
+  (setq save-place t))
+
+(defun turn-on-whitespace ()
+  (whitespace-mode t))
+
+(add-hook 'coding-hook 'local-column-number-mode)
+(add-hook 'coding-hook 'local-comment-auto-fill)
+(add-hook 'coding-hook 'turn-on-hl-line-mode)
+;;(add-hook 'coding-hook 'pretty-lambdas)
+  
+(defun run-coding-hook ()
+  "Enable things that are convenient across all coding buffers."
+  (run-hooks 'coding-hook))
 
 (defun untabify-buffer ()
   (interactive)
@@ -123,7 +155,8 @@
               (some (lambda (f) (file-newer-than-file-p f autoload-file))
                     (directory-files autoload-dir t "\\.el$")))
       (message "Updating autoloads...")
-      (update-directory-autoloads autoload-dir)))
+      (let (emacs-lisp-mode-hook)
+        (update-directory-autoloads autoload-dir))))
   (load autoload-file))
 
 ;; TODO: fix this
@@ -161,6 +194,13 @@
   "If you can't pair program with a human, use this instead."
   (interactive)
   (message (if (y-or-n-p "Do you have a test for that? ") "Good." "Bad!")))
+
+(defun esk-paredit-nonlisp ()
+  "Turn on paredit mode for non-lisps."
+  (set (make-local-variable 'paredit-space-for-delimiter-predicate)
+       (lambda (endp delimiter)
+         (equal (char-syntax (char-before)) ?\")))
+  (paredit-mode 1))
 
 ;; A monkeypatch to cause annotate to ignore whitespace
 (defun vc-git-annotate-command (file buf &optional rev)
