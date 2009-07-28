@@ -138,3 +138,7 @@
 (require 'magit)
 
 (server-start)
+
+;; tramp
+(setq tramp-default-method "ssh")
+(setq shell-prompt-pattern "^.*~: $")
