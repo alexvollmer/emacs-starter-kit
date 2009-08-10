@@ -142,3 +142,10 @@
 ;; tramp
 (setq tramp-default-method "ssh")
 (setq shell-prompt-pattern "^.*~: $")
+
+;; erlang
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/erlang-mode"))
+(setq erlang-root-dir "/usr/local/otp")
+(setq exec-path (cons "/usr/local/otp/bin" exec-path))
+(require 'erlang-start)
+(add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
