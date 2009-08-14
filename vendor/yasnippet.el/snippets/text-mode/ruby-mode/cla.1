@@ -1,9 +1,13 @@
 # This was cloned from a TextMate bundle for yasnippet.
 # --
-${1:${TM_FILENAME/(?:\A|_)([A-Za-z0-9]+)(?:\.rb)?/(?2::\u$1)/g}} = Struct.new(:${2:attr_names}) do
-	def ${3:method_name}
-		$0
-	end
-	
-	
+class ${1:`(let ((fn (capitalize (file-name-nondirectory
+                                 (file-name-sans-extension
+				 (or (buffer-file-name)
+				     (buffer-name (current-buffer))))))))
+           (cond
+             ((string-match "_" fn) (replace-match "" nil nil fn))
+              (t fn)))`}
+  def initialize($2)
+   $0
+  end
 end

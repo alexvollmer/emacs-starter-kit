@@ -1,5 +1,11 @@
-#name : class << self ... end
+# This was cloned from a TextMate bundle for yasnippet.
 # --
-class << ${self}
+class ${1:`(let ((fn (capitalize (file-name-nondirectory
+                                 (file-name-sans-extension
+				 (or (buffer-file-name)
+				     (buffer-name (current-buffer))))))))
+           (cond
+             ((string-match "_" fn) (replace-match "" nil nil fn))
+              (t fn)))`}
   $0
 end
