@@ -149,3 +149,15 @@
 ;; tramp
 (setq tramp-default-method "ssh")
 (setq shell-prompt-pattern "^.*~: $")
+
+;; insert Emacs-appropriate encoding comment for encoding in
+;; the commenting style appropriate to the current mode
+(defun insert-encoding (encoding)
+  "Insert the encoding local variable"
+  (interactive "sEncoding: ")
+  (insert (format "-*- coding: %s -*-" encoding))
+  (move-beginning-of-line nil)
+  (set-mark-command nil)
+  (move-end-of-line nil)
+  (comment-dwim nil)
+  (insert "\n"))
