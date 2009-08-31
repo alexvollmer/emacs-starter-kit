@@ -1,4 +1,4 @@
-;; (require 'autotest)
+(require 'autotest)
 
 (font-lock-add-keywords
  'ruby-mode
