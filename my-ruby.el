@@ -1,5 +1,8 @@
 (require 'autotest)
 
+(add-to-list 'load-path (concat dotfiles-dir "/vendor"))
+(require 'toggle)
+
 (font-lock-add-keywords
  'ruby-mode
  '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
@@ -28,6 +31,7 @@
                               compilation-info-face
                             compilation-error-face))
                        (3 compilation-info-face t t)))
+        (local-set-key "\C-c\C-t" 'toggle-buffer)
 	))
 
 (autoload 'rubydb "rubydb3x" "Ruby debugger" t)

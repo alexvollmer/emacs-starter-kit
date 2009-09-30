@@ -161,3 +161,6 @@
   (move-end-of-line nil)
   (comment-dwim nil)
   (insert "\n"))
+
+(require 'my-ess)
+(require 'my-ruby)
