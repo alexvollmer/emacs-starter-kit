@@ -34,8 +34,9 @@
 (color-theme-initialize)
 ;(color-theme-aalto-light)
 ;(color-theme-andreas)
-;(color-theme-charcoal-black)
-(color-theme-blackboard)
+(color-theme-charcoal-black)
+;; (color-theme-blackboard)
+;; (color-theme-marquardt)
 
 ;; extra CSS goodness for portal work
 (add-to-list 'auto-mode-alist '("\\.css\\.ncss$" . css-mode))
