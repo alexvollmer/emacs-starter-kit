@@ -32,6 +32,7 @@
                             compilation-error-face))
                        (3 compilation-info-face t t)))
         (local-set-key "\C-c\C-t" 'toggle-buffer)
+        (linum-mode t)
 	))
 
 (autoload 'rubydb "rubydb3x" "Ruby debugger" t)
