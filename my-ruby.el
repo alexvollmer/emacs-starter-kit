@@ -73,4 +73,9 @@
 ;;                              'flymake-display-err-menu-for-current-line)
 ;;               (flymake-mode t))))
 
+
+;; rspec-mode
+(add-to-list 'load-path (concat dotfiles-dir "/vendor/rspec-mode"))
+(require 'rspec-mode)
+
 (provide 'my-ruby)
