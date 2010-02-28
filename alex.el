@@ -165,3 +165,5 @@
 
 (require 'my-ess)
 (require 'my-ruby)
+
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
