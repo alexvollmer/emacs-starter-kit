@@ -1,3 +1,0 @@
-# This was cloned from a TextMate bundle for yasnippet.
-# --
-assert_not_equal ${1:unexpected}, ${2:actual}

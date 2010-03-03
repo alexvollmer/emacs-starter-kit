@@ -137,12 +137,6 @@
 (require 'erlang-start)
 (add-to-list 'auto-mode-alist '("\\.erl$" . erlang-mode))
 
-;; yasnippet
-(add-to-list 'load-path (concat dotfiles-dir "/vendor/yasnippet.el"))
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat dotfiles-dir "/vendor/yasnippet.el/snippets"))
-
 (require 'magit)
 
 (server-start)
@@ -167,3 +161,18 @@
 (require 'my-ruby)
 
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+;; yasnippet
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/yasnippet-0.6.1c"))
+(require 'yasnippet)
+(require 'dropdown-list)
+(setq yas/prompt-functions '( yas/dropdown-prompt
+                              yas/ido-prompt
+                              yas/completing-prompt))
+
+(yas/initialize)
+(setq yas/root-directory (concat dotfiles-dir "elpa-to-submit/yasnippet-0.6.1c/snippets"))
+(yas/load-directory yas/root-directory)
+(yas/load-directory (concat dotfiles-dir "mysnippets"))
+
+(setq yas/trigger-key "M-RET")

@@ -1,3 +1,0 @@
-# This was cloned from a TextMate bundle for yasnippet.
-# --
-assert_instance_of ${1:ExpectedClass}, ${0:actual_instance}
